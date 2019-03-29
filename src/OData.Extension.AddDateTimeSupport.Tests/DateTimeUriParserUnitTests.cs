@@ -30,9 +30,7 @@ namespace Cmc.Nexus.Web.Tests.Services
         [TestMethod, TestCategory("Unit Tests")]
         public void Parse_StringWithDate2_FoundOneMatch()
         {
-            //var input = "Examples:  '1900-12-31' .";
             var input = "Examples:  1900-12-31  .";
-            //var input = "Examples:  '12-31-1900' .";
 
             var result = _sut.Parse(input);
 
@@ -41,6 +39,17 @@ namespace Cmc.Nexus.Web.Tests.Services
             var firstItem = result.FirstOrDefault();
             Assert.AreEqual("1900-12-31", firstItem.RegexMatch);
             Assert.AreEqual(DateTime.Parse("12/31/1900"), firstItem.DateTimeValue);
-        }            
+        }
+
+        [TestMethod, TestCategory("Unit Tests")]
+        public void Parse_StringWithDateOffset_NoMatch()
+        {
+            var input = "Examples:  2019-02-17T00:00:00Z  .";
+
+            var result = _sut.Parse(input);
+
+            // Assert
+            Assert.AreEqual(0, result.Count);
+        }
     }
 }

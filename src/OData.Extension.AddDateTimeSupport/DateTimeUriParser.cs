@@ -12,6 +12,13 @@ namespace OData.ActionFilter.AddDateTimeSupport
             var searchPatterns = new List<SearchPattern>();
             searchPatterns.Add(new SearchPattern
             {
+                // Search Pattern = 'YYYY-MM-DD'
+                Regex = @"(([1]{1}[9]{1}[9]{1}\d{1})|([1-9]{1}\d{3}))-[0,1]?\d{1}-(([0-3]?\d{1})|([3][0,1]{1}))T00:00:00Z",
+                ContainsSingleQuotes = true,
+                Ignore = true
+            });
+            searchPatterns.Add(new SearchPattern
+            {
                 // Search Pattern = 'MM/DD/YYYY'
                 Regex = @"'[0,1]?\d{1}\/(([0-2]?\d{1})|([3][0,1]{1}))\/(([1]{1}[9]{1}[9]{1}\d{1})|([1-9]{1}\d{3}))'",
                 ContainsSingleQuotes = true
@@ -52,11 +59,14 @@ namespace OData.ActionFilter.AddDateTimeSupport
                         dateValue = DateTime.Parse(matchStringDateValue);
                     }
 
-                    matches.Add(new DateTimeMatch
+                    if (!searchPattern.Ignore) // if this pattern is to be ignored
                     {
-                        RegexMatch = matchStringDateValue,
-                        DateTimeValue = dateValue
-                    });
+                        matches.Add(new DateTimeMatch
+                        {
+                            RegexMatch = matchStringDateValue,
+                            DateTimeValue = dateValue
+                        });
+                    }
 
                     input = input.Remove(matchStringStartPosition, matchStringLength);
                     input = input.Insert(matchStringStartPosition, new string(' ', matchStringLength));
@@ -71,5 +81,6 @@ namespace OData.ActionFilter.AddDateTimeSupport
     {
         public string Regex { get; set; }
         public bool ContainsSingleQuotes { get; set; }
+        public bool Ignore { get; set; }
     }
 }

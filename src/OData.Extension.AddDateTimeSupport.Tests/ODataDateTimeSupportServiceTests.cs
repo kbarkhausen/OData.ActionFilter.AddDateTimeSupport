@@ -64,6 +64,18 @@ namespace Cmc.Nexus.Web.Tests.Services
         }
 
         [TestMethod, TestCategory("Unit Tests")]
+        public void UpdateRequestUri_ContainsTimeOffSetInFilter_ReturnsSameUri()
+        {
+            var input = "http://localhost:10121/odata/People()?$filter=BirthDate gt 1968-01-19T00:00:00Z&$orderby=LastName";
+            var output = "http://localhost:10121/odata/People()?$filter=BirthDate gt 1968-01-19T00:00:00Z&$orderby=LastName";
+
+            var result = _sut.UpdateRequestUri(new Uri(input));
+
+            // Assert
+            Assert.AreEqual(output, Uri.UnescapeDataString(result.AbsoluteUri));
+        }
+
+        [TestMethod, TestCategory("Unit Tests")]
         public void UpdateRequestUri_ContainsNoFilter_ReturnsSameUri()
         {
             var input = "http://localhost:10121/odata/People()?$orderby=LastName";
