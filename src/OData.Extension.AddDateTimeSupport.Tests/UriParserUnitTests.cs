@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Cmc.Nexus.Web.Tests.Services
+namespace OData.ActionFilter.AddDateTimeSupport.Tests
 {
     [TestClass]
     public class UriParserUnitTests

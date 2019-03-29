@@ -3,7 +3,7 @@ using OData.ActionFilter.AddDateTimeSupport;
 using System;
 using System.Linq;
 
-namespace Cmc.Nexus.Web.Tests.Services
+namespace OData.ActionFilter.AddDateTimeSupport.Tests
 {
     [TestClass]
     public class DateTimeUriParserUnitTests
