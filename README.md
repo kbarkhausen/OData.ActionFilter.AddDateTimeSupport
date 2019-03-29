@@ -23,7 +23,7 @@ For example, the following OData request:
 
 Would become:
 
-`http://localhost/odata/People?$filter=Birtdate gt '1978-01-01T00:00:00KZ'`
+`http://localhost/odata/People?$filter=Birtdate gt 1978-01-01T00:00:00KZ`
 
 
 ### Implementing this filter
