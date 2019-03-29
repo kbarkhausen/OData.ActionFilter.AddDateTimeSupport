@@ -28,7 +28,11 @@ Would become:
 
 ### Implementing this filter
 
-You can use this action filter by applying it to a custom base Controller class:
+You can install or update to the released NuGet packages by using the NuGet Package Manager Console:
+
+```Install-Package OData.ActionFilter.AddDateTimeSupport```
+
+Apply this action filter by decorating a custom base Controller class (as shown below):
 
 ```csharp
 [ODataDateTimeSupportActionFilter]
@@ -44,7 +48,7 @@ public class MyODataController : MyODataControllerBase
 }
 ```
 
-You can use this action filter by applying it to specific methods as well:
+Or by applying it to specific OData query methods as well:
 
 ```csharp
 public class MyODataController : Microsoft.AspNet.OData.ODataController
